@@ -1,4 +1,4 @@
-package essential.level2;
+package essential.level3;
 
 
 import java.util.InputMismatchException;
@@ -39,9 +39,12 @@ public class Main {
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
                 System.out.println("프로그램을 종료합니다.\n");
-            } else if(selectNo <= 1+0.1*getMenuAll.size()) {
+            } else if (selectNo <= 1 + 0.1 * getMenuAll.size()) {
                 menuNo = selectNo;
-                System.out.println(menuID.getMenu(selectNo).getMenuName() + "을 선택하였습니다.");
+                menuID.getMenu(selectNo).ifPresentOrElse(
+                        item -> System.out.println(item.getMenuName() + "을 선택하였습니다."),
+                        () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
+                );
             } else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }

@@ -1,8 +1,8 @@
-package essential.level2;
+package essential.level3;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class MenuID {
 
@@ -21,9 +21,10 @@ public class MenuID {
     }
 
     /*게터*/
-    public MenuItem getMenu(Double MenuID) {
-        return menuMap.get(MenuID);
+    public Optional<MenuItem> getMenu(Double MenuID) {
+        return Optional.ofNullable(menuMap.get(MenuID));
     }
+
 
     /*게터 전체*/
     public Map<Double, MenuItem> getMenuAll() {
