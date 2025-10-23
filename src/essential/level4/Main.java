@@ -10,9 +10,10 @@ public class Main {
         try (Scanner sc = new Scanner(System.in)) {
             double selectNo = 99999;
 
-            /*Kiosk클래스 실행 반복문*/
+            /*Menu클래스 실행 반복문*/
             while (selectNo != 0) {
 
+                Menu menu = new Menu();
                 Kiosk kiosk = new Kiosk();
                 System.out.println("안녕하세요 SHAKESHACK입니다.");
                 System.out.println("키오스크를 실행하시겠습니까?");
@@ -28,7 +29,7 @@ public class Main {
                 if (selectNo == 0) {
                     System.out.println("프로그램을 종료합니다.\n");
                 } else if (selectNo == 1) {
-                    kiosk.start(kiosk.getMenuAll(), sc, kiosk);
+                    kiosk.start(menu.getMenuAll(), sc, menu);
                 } else {
                     System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
                 }
