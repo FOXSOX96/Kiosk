@@ -1,27 +1,35 @@
-package essential.level4;
+package essential.level4.kiosk;
+
+import essential.level4.Main;
+import essential.level4.Menu;
+import essential.level4.MenuItem;
 
 import java.util.Map;
 import java.util.Scanner;
 
-public class Kiosk {
+public class KioskMenu {
 
+    /*속성*/
+    double selectNo = 99999; /*번호선택*/
+    double menuNo = 99999; /*메뉴번호*/
 
     /*메뉴선택 반복문*/
-    public void start (Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu) {
+    public double selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo) {
 
-        /*속성*/
-        double selectNo = 99999; /*번호선택*/
-        double menuNo = 99999; /*메뉴번호*/
 
-        /* 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
+        /* 카테고리 속 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
 
+
             System.out.println("[SHAKESHACK MENU ]");
+            /*카테고리 속 메뉴나열*/
             for (Map.Entry<Double, MenuItem> entry : getMenuAll.entrySet()) {
                 Double key = entry.getKey();
+                if (key > categoryNo && key < categoryNo + 1.0) {
                 MenuItem item = entry.getValue();
                 System.out.printf("%-4s | %-14s (%4.1f) - %s\n",
                         key, item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
+            }
             }
             System.out.println("0. 뒤로가기");
 
@@ -38,16 +46,11 @@ public class Kiosk {
                         item -> System.out.println(item.getMenuName() + "을 선택하였습니다."),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
+                return menuNo;
             } else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }
-
-
         }
-
-
+        return menuNo;
     }
-
-
-
 }
