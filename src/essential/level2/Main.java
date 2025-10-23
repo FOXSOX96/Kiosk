@@ -1,8 +1,11 @@
 package essential.level2;
 
 
+import java.util.Collections;
 import java.util.InputMismatchException;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +15,7 @@ public class Main {
 
         /*MenuID클래스 객체*/
         MenuID menuID = new MenuID();
-        Map<Double, MenuItem> getMenuAll = menuID.getMenuAll();
+        List<MenuItem> getMenuAll = menuID.getMenuAll();
 
 
 
@@ -24,11 +27,11 @@ public class Main {
         while (selectNo != 0) {
 
             System.out.println("[SHAKESHACK MENU ]");
-            for (Map.Entry<Double, MenuItem> entry : getMenuAll.entrySet()) {
-                Double key = entry.getKey();
-                MenuItem item = entry.getValue();
+            for (int i = 0; i < getMenuAll.size(); i++) {
+                double no = 1.0 + (i * 0.1);
+                MenuItem item = getMenuAll.get(i);
                 System.out.printf("%-4s | %-14s (%4.1f) - %s\n",
-                        key, item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
+                        no, item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
             }
             System.out.println("0. 종료");
 
@@ -39,10 +42,14 @@ public class Main {
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
                 System.out.println("프로그램을 종료합니다.\n");
-            } else if(selectNo <= 1+0.1*getMenuAll.size()) {
+            } else if (selectNo >= 1 && selectNo <= getMenuAll.size()) {
                 menuNo = selectNo;
-                System.out.println(menuID.getMenu(selectNo).getMenuName() + "을 선택하였습니다.");
-            } else {
+                menuID.getMenu(selectNo)
+                        .ifPresentOrElse(
+                                item -> System.out.println(item.getMenuName() + "을 선택하였습니다."),
+                                ()   -> System.out.println("해당 메뉴가 존재하지 않습니다.")
+                        );
+            }else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }
 
@@ -50,6 +57,39 @@ public class Main {
         }
 
     }
+
+    public static class MenuID {
+
+        /*메뉴 아이디 할당 : MenuID =double*/
+        private List<MenuItem> menuList = new LinkedList<>();
+
+        /*생성자*/
+        public MenuID() {
+            /*메뉴 추가*/
+            menuList.add(new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거"));
+            menuList.add(new MenuItem("SmokeShack", 8.9, "베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거"));
+            menuList.add(new MenuItem("Cheeseburger", 6.9, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거"));
+            menuList.add(new MenuItem("Hamburger", 5.4, "비프패티를 기반으로 야채가 들어간 기본버거"));
+        }
+
+        /*게터*/
+        public Optional<MenuItem> getMenu(double number) {
+            int idx = (int) Math.round((number - 1.0) * 10);
+            if (idx < 0 || idx >= menuList.size()) return Optional.empty();
+            return Optional.of(menuList.get(idx));
+        }
+
+        /*게터 전체*/
+        public List<MenuItem> getMenuAll() {
+            return Collections.unmodifiableList(menuList);
+        }
+
+        /*세터*/
+        public void setMenuList(List<MenuItem> menuList) {
+            this.menuList = new LinkedList<>(menuList);
+        }
+    }
+
 
     /*selectNo-스캐너입력 할당*/
     public static double getSelectNo(Scanner sc) {
