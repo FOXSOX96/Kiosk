@@ -1,6 +1,5 @@
 package essential.level3;
 
-import java.util.InputMismatchException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -39,15 +38,15 @@ public class Kiosk {
                 System.out.printf("%-4s | %-14s (%4.1f) - %s\n",
                         key, item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
             }
-            System.out.println("0. 종료");
+            System.out.println("0. 뒤로가기");
 
-            /*입력-selectNo할당*/
+            /*스캐너입력-selectNo할당*/
             System.out.println("메뉴의 번호를 선택해주세요");
-            selectNo = getSelectNo(sc);
+            selectNo = Main.getSelectNo(sc);
 
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
-                System.out.println("프로그램을 종료합니다.\n");
+                System.out.println("키오스크를 종료합니다.\n");
             } else if (selectNo <= 1 + 0.1 * getMenuAll.size()) {
                 menuNo = selectNo;
                 kiosk.getMenu(selectNo).ifPresentOrElse(
@@ -64,16 +63,7 @@ public class Kiosk {
 
     }
 
-    /*selectNo-스캐너입력 할당*/
-    public static double getSelectNo(Scanner sc) {
-        double selectNo;
-        try {
-            selectNo = sc.nextDouble();
-        } catch (InputMismatchException e) {
-            throw new IllegalArgumentException("메뉴와 일치하는 숫자를 입력해야 합니다.");
-        }
-        return selectNo;
-    }
+
 
     /*게터*/
     public Optional<MenuItem> getMenu(Double MenuID) {
