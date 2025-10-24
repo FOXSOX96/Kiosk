@@ -19,11 +19,9 @@ public class MenuItem {
     public String getMenuName() {
         return menuName;
     }
-
     public double getMenuPrice() {
         return menuPrice;
     }
-
     public String getMenuDetail() {
         return menuDetail;
     }
@@ -32,11 +30,9 @@ public class MenuItem {
     public void setMenuName(String menuName) {
         this.menuName = menuName;
     }
-
     public void setMenuPrice(double menuPrice) {
         this.menuPrice = menuPrice;
     }
-
     public void setMenuDetail(String menuDetail) {
         this.menuDetail = menuDetail;
     }

@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class KioskCategory {
 
     /*속성*/
-    private double selectNo = -1; /*번호선택*/
-    private double categoryNo = -1; /*카테고리번호*/
+    private double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
+    private double categoryNo = -1; /*카테고리번호*/ /*리턴하여 재사용하는 변수*/
 
     /*카테고리 선택 반복문*/
     public double selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu) {

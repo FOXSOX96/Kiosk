@@ -6,12 +6,12 @@ import java.util.Optional;
 
 public class Menu {
 
-
     /*메뉴 아이디 할당 : MenuID =double*/
     private Map<Double, MenuItem> menuMap = new LinkedHashMap<>();
     private Map<Double, String> categoryMap = new LinkedHashMap<>();
 
     /*생성자*/
+
     public Menu() {
         /*카테고리1 버거*/
         categoryMap.put(1.0, "Burgers");

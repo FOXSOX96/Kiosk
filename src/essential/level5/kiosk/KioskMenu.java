@@ -13,19 +13,21 @@ import java.util.Scanner;
 public class KioskMenu {
 
     /*속성*/
-    private double selectNo = -1; /*번호선택*/
-    private double menuNo = -1; /*메뉴번호*/
+    private double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
+    private double menuNo = -1; /*메뉴번호*/ /*리턴하여 재사용하는 변수*/
 
+    /*생성자*/
+
+    /*기능*/
     /*메뉴선택 반복문*/
     public double selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo) {
-
 
         /* 카테고리 속 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
 
             System.out.println("[SHAKESHACK MENU ]");
             /*카테고리 속 메뉴나열*/
-            /*categoryNo의 1의자리 값을 갖는 MwnuNo만 필터*/
+            /*categoryNo의 1의자리 값을 갖는 MenuNo만 필터*/
             /*사용자편의상 번호 선택을 정수로 변환하여 나타냄(1.01, 1.02, 1.03을 1,2,3으로 출력)*/
             for (Map.Entry<Double, MenuItem> entry : getMenuAll.entrySet()) {
                 Double key = entry.getKey();
