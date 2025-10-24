@@ -5,6 +5,7 @@ import essential.level4.Menu;
 
 import java.util.Map;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class KioskCategory {
 
@@ -16,14 +17,16 @@ public class KioskCategory {
     public double selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu) {
         /* 카테고리 선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
+            DecimalFormat df = new DecimalFormat("#");
 
             System.out.println("[ MAIN MENU ]");
             /*카테고리 나열*/
+            /*사용자편의상 소수점제거하고 정수만 출력*/
             for (Map.Entry<Double, String> entry : getCategoryAll.entrySet()) {
                 Double key = entry.getKey();
                 String item = entry.getValue();
                 System.out.printf("%-4s | %-14s\n",
-                        key, item);
+                        df.format(key)+".", item);
             }
             System.out.println("0. 뒤로가기");
 
