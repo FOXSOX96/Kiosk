@@ -14,8 +14,8 @@ import java.math.RoundingMode;
 public class KioskMenu {
 
     /*속성*/
-    double selectNo = 99999; /*번호선택*/
-    double menuNo = 99999; /*메뉴번호*/
+    double selectNo = -1; /*번호선택*/
+    double menuNo = -1; /*메뉴번호*/
 
     /*메뉴선택 반복문*/
     public double selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo) {
@@ -27,7 +27,7 @@ public class KioskMenu {
             System.out.println("[SHAKESHACK MENU ]");
             /*카테고리 속 메뉴나열*/
             /*categoryNo의 1의자리 값을 갖는 MwnuNo만 필터*/
-            /*사용자편의상 번호 선택을 정수로 변환하여 나타냄(1.1, 1.2, 1.3을 1,2,3으로 출력)*/
+            /*사용자편의상 번호 선택을 정수로 변환하여 나타냄(1.01, 1.02, 1.03을 1,2,3으로 출력)*/
             for (Map.Entry<Double, MenuItem> entry : getMenuAll.entrySet()) {
                 Double key = entry.getKey();
                 BigDecimal keyD = BigDecimal.valueOf(key);
@@ -39,24 +39,23 @@ public class KioskMenu {
                             frac.multiply(BigDecimal.TEN).multiply(BigDecimal.TEN).intValue()+".", item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
                 }
             }
-            System.out.println("0. 뒤로가기");
+            System.out.println("0. 선택완료");
 
             /*스캐너입력-selectNo할당*/
-            /*사용자편의상 정수를 입력시켰으므로 menuNo의 소수점에 입력값 넣음*/
             System.out.println("메뉴의 번호를 선택해주세요");
             selectNo = Main.getSelectNo(sc);
-            selectNo = selectNo *0.01 + categoryNo;
 
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
-                System.out.println("키오스크를 종료합니다.\n");
+                System.out.println("주문을 완료합니다.\n");
+                return menuNo;
             } else if (selectNo <= getMenuAll.size()) {
+                selectNo = selectNo *0.01 + categoryNo;  /*사용자편의상 정수를 입력시켰으므로 menuNo의 소수점에 입력값 넣음*/
                 menuNo = selectNo;
                 menu.getMenu(selectNo).ifPresentOrElse(
                         item -> System.out.println(item.getMenuName() + "을 선택하였습니다."),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
-                return menuNo;
             } else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }

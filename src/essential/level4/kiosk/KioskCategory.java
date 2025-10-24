@@ -10,8 +10,8 @@ import java.text.DecimalFormat;
 public class KioskCategory {
 
     /*속성*/
-    double selectNo = 99999; /*번호선택*/
-    double categoryNo = 99999; /*카테고리번호*/
+    double selectNo = -1; /*번호선택*/
+    double categoryNo = -1; /*카테고리번호*/
 
     /*카테고리 선택 반복문*/
     public double selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu) {
@@ -28,7 +28,7 @@ public class KioskCategory {
                 System.out.printf("%-4s | %-14s\n",
                         df.format(key)+".", item);
             }
-            System.out.println("0. 뒤로가기");
+            System.out.println("0. 완료");
 
             /*스캐너입력-selectNo할당*/
             System.out.println("메뉴의 번호를 선택해주세요");
@@ -36,14 +36,14 @@ public class KioskCategory {
 
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
-                System.out.println("키오스크를 종료합니다.\n");
+                System.out.println("카테고리선택을 완료합니다.\n");
+                return categoryNo;
             } else if (selectNo <= getCategoryAll.size()) {
                 categoryNo = selectNo;
                 menu.getCategory(categoryNo).ifPresentOrElse(
                         item -> System.out.println(item + "을 선택하였습니다."),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
-                return categoryNo;
             } else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }

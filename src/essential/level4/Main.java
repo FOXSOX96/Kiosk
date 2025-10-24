@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            double selectNo = 99999;
+            double selectNo = -1;
 
             /*KioskCategory클래스 실행 반복문*/
             while (selectNo != 0) {
@@ -34,9 +34,11 @@ public class Main {
                     System.out.println("프로그램을 종료합니다.\n");
                 } else if (selectNo == 1) {
                     double categoryNo = kioskCategory.selectCategory(menu.getCategoryAll(), sc, menu);
-                    /*KioskMenu클래스 실행 반복문*/
-                    kioskMenu.selectMenu(menu.getMenuAll(), sc, menu, categoryNo);
-
+                    /*카테고리 선택시 메뉴선택으로 넘어감*/
+                    if (categoryNo != -1) {
+                        /*KioskMenu클래스 실행 반복문*/
+                        kioskMenu.selectMenu(menu.getMenuAll(), sc, menu, categoryNo);
+                    }
 
                 } else {
                     System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
