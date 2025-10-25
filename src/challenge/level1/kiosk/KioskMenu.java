@@ -13,15 +13,16 @@ import java.util.Scanner;
 public class KioskMenu {
 
     /*속성*/
-    private double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
-    private double menuNo = -1; /*메뉴번호*/ /*리턴하여 재사용하는 변수*/
-    /*생성자*/
 
+    /*생성자*/
     /*기능*/
     /*메뉴선택 반복문*/
-    public double selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo) {
 
-        /* 카테고리 속 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
+    public Cart selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo, Cart cart) {
+    double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
+    double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
+
+        /*카테고리 속 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
 
             System.out.println("[SHAKESHACK MENU ]");
@@ -36,7 +37,7 @@ public class KioskMenu {
                 if (key > categoryNo && key < categoryNo + 1.0) {
                     MenuItem item = entry.getValue();
                     System.out.printf("%-4s | %-14s (%4.1f) - %s\n",
-                            frac.multiply(BigDecimal.TEN).multiply(BigDecimal.TEN).intValue()+".", item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
+                            frac.multiply(BigDecimal.TEN).multiply(BigDecimal.TEN).intValue() + ".", item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
                 }
             }
             System.out.println("0. 선택완료");
@@ -47,20 +48,52 @@ public class KioskMenu {
 
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
-                System.out.println("주문을 완료합니다.\n");
-                return menuNo;
+                return cart;
             } else if (selectNo <= getMenuAll.size()) {
-                selectNo = selectNo *0.01 + categoryNo;  /*사용자편의상 정수를 입력시켰으므로 menuNo의 소수점에 입력값 넣음*/
+                selectNo = selectNo * 0.01 + categoryNo;  /*사용자편의상 정수를 입력시켰으므로 menuNo의 소수점에 입력값 넣음*/
                 menuNo = selectNo;
                 menu.getMenu(selectNo).ifPresentOrElse(
-                        item -> System.out.printf("선택한메뉴 : %-14s (%4.1f) - %s\n",
+                        item -> System.out.printf("선택한 메뉴 : %-14s (%4.1f) - %s\n",
                                 item.getMenuName(), item.getMenuPrice(), item.getMenuDetail()),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
             } else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }
+
+
+            /*장바구니 담기 Cart.java*/
+            selectNo = -1; /*초기화*/
+            while (selectNo != 2) {
+                System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
+                System.out.println("1. 확인");
+                System.out.println("2. 취소");
+                /*스캐너입력-selectNo할당*/
+                selectNo = Main.getSelectNo(sc);
+
+                if (selectNo == 1) {
+                    MenuItem selectedItem =
+                            menu.getMenu(menuNo)
+                                    .orElseThrow(() -> new IllegalArgumentException("선택하신 번호와 일치하는 메뉴가 없습니다.")); /*옵셔널이라 에러문 추가*/
+
+                    cart.addCartMap(menuNo, selectedItem);
+                    System.out.println("장바구니");
+
+
+                   for(MenuItem menuItem : cart.getCartMap().values()){
+                       System.out.printf("%-14s (%4.1f)\n",
+                               menuItem.getMenuName(), menuItem.getMenuPrice());
+                   }
+                   break;
+                } else if (selectNo == 2) {
+                    break;
+                } else {
+                    selectNo = -1; /*0 입력할 수 있으니 초기화*/
+                    System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
+                }
+            }
+
         }
-        return menuNo;
+        return cart;
     }
 }

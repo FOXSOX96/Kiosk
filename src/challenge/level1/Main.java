@@ -1,10 +1,12 @@
 package challenge.level1;
 
 
+import challenge.level1.kiosk.Cart;
 import challenge.level1.kiosk.KioskCategory;
 import challenge.level1.kiosk.KioskMenu;
 
 import java.util.InputMismatchException;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -14,6 +16,7 @@ public class Main {
         Menu menu = new Menu();
         KioskCategory kioskCategory = new KioskCategory();
         KioskMenu kioskMenu = new KioskMenu();
+        Cart cart = new Cart(new LinkedHashMap<>());
 
         double selectNo = -1; /*매번 새로 설정하는 변수*/
 
@@ -43,7 +46,7 @@ public class Main {
                     /*3.메뉴 선택지점 : 카테고리 선택해야 메뉴선택으로 넘어감*/
                     if (categoryNo != -1) {
                         /*KioskMenu클래스 실행 반복문*/
-                        kioskMenu.selectMenu(menu.getMenuAll(), sc, menu, categoryNo);
+                        cart = kioskMenu.selectMenu(menu.getMenuAll(), sc, menu, categoryNo, cart);
                     }
 
                 } else {

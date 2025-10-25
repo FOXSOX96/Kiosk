@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 public class KioskCategory {
 
-    /*속성*/
-    private double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
-    private double categoryNo = -1; /*카테고리번호*/ /*리턴하여 재사용하는 변수*/
 
     /*카테고리 선택 반복문*/
     public double selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu) {
+        /*속성*/
+        double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
+        double categoryNo = -1; /*카테고리번호*/ /*리턴하여 재사용하는 변수*/
         /* 카테고리 선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
             DecimalFormat df = new DecimalFormat("#");
@@ -26,7 +26,7 @@ public class KioskCategory {
                 Double key = entry.getKey();
                 String item = entry.getValue();
                 System.out.printf("%-4s | %-14s\n",
-                        df.format(key)+".", item);
+                        df.format(key) + ".", item);
             }
             System.out.println("0. 완료");
 
