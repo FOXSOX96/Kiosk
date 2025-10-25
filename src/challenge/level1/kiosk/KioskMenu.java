@@ -15,7 +15,6 @@ public class KioskMenu {
     /*속성*/
     private double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
     private double menuNo = -1; /*메뉴번호*/ /*리턴하여 재사용하는 변수*/
-
     /*생성자*/
 
     /*기능*/
@@ -54,7 +53,8 @@ public class KioskMenu {
                 selectNo = selectNo *0.01 + categoryNo;  /*사용자편의상 정수를 입력시켰으므로 menuNo의 소수점에 입력값 넣음*/
                 menuNo = selectNo;
                 menu.getMenu(selectNo).ifPresentOrElse(
-                        item -> System.out.println(item.getMenuName() + "을 선택하였습니다."),
+                        item -> System.out.printf("선택한메뉴 : %-14s (%4.1f) - %s\n",
+                                item.getMenuName(), item.getMenuPrice(), item.getMenuDetail()),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
             } else {
