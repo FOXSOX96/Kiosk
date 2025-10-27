@@ -8,11 +8,13 @@ import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
+import static challenge.level1.kiosk.KioskMenu.cartState;
+
 public class KioskCategory {
     KioskMenu kioskMenu = new KioskMenu();
 
     /*카테고리 선택 반복문*/
-    public void selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu, Cart cart) {
+    public void selectCategory (Map<Double, String> getCategoryAll, Scanner sc, Menu menu, Cart cart) {
         /*속성*/
         double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
         double categoryNo = -1; /*카테고리번호*/ /*재사용하는 변수*/
@@ -30,7 +32,7 @@ public class KioskCategory {
                         df.format(key) + ".", item);
             }
             System.out.println("0. 종료");
-
+            /*장바구니에 메뉴가 담겨있을 때만, 카테고리 마지막번호 다음번호로 출력*/
             if (!cart.getCartMap().isEmpty()){
                 System.out.printf("%-4s | %-14s | %-14s\n",
                         getCategoryAll.size()+1+".", "주문", "장바구니를 확인 후 주문합니다.");
@@ -53,10 +55,12 @@ public class KioskCategory {
                         item -> System.out.println(item + "을 선택하였습니다."),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
-            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+1) {
+            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+1) {/*장바구니에 메뉴가 담겨있을 때만, 주문 선택가능*/
                 selectNo = -1;/*초기화*/
                     System.out.println("장바구니의 메뉴를 주문합니다.");
-            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+2) {
+
+                    /*장바구니 현재 상태안내문*/
+            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+2) {/*장바구니에 메뉴가 담겨있을 때만, 장바구니비우기 선택가능*/
                 selectNo = -1;/*초기화*/
                 System.out.println("장바구니를 비웁니다.");
                 cart.getCartMap().clear();
