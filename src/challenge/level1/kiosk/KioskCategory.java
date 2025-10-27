@@ -32,9 +32,9 @@ public class KioskCategory {
 
             if (!cart.getCartMap().isEmpty()){
                 System.out.printf("%-4s | %-14s | %-14s\n",
-                        "4.", "주문", "장바구니를 확인 후 주문합니다.");
+                        getCategoryAll.size()+1+".", "주문", "장바구니를 확인 후 주문합니다.");
                 System.out.printf("%-4s | %-14s | %-14s\n",
-                        "5.", "취소", "진행중인 주문을 취소합니다.");
+                        getCategoryAll.size()+2+".", "비우기", "장바구니를 비웁니다.");
             }
 
 
@@ -52,7 +52,15 @@ public class KioskCategory {
                         item -> System.out.println(item + "을 선택하였습니다."),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
-            } else {
+            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+1) {
+                selectNo = -1;/*초기화*/
+                System.out.println("장바구니의 메뉴를 주문합니다.");
+            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+2) {
+                selectNo = -1;/*초기화*/
+                System.out.println("장바구니를 비웁니다.");
+
+
+            }else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }
 
