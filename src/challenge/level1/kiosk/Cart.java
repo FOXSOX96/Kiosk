@@ -34,19 +34,22 @@ public class Cart {
 
     /*cartCount 기능*/
     /*담기*/
-    public void addCartCount(Double key, Integer count) {
+    public void addCartCount(Double key) {
         this.cartCount.putIfAbsent(key, 0);
         this.cartCount.replace(key, this.cartCount.get(key)+1);
     }
 
     /*뺴기*/
-    public void subCartCount(Double key, Integer count) {
+    public void subCartCount(Double key) {
         try{
         this.cartCount.replace(key, this.cartCount.get(key)-1);
         if(this.cartCount.get(key) == 0) {
             this.cartCount.remove(key);
+            this.cartMap.remove(key);
         }
         } catch (NullPointerException e) {
+            this.cartCount.remove(key);
+            this.cartMap.remove(key);
             System.out.println("선택하신 상품이 장바구니에 담겨있지 않습니다.");
             return;
         }

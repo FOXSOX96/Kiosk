@@ -21,7 +21,6 @@ public class KioskMenu {
     public Cart selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo, Cart cart) {
     double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
     double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
-        int count = -1; /*형식상 담아둔 카트 수량: 키 값이 없으면 1로 생성함*/
 
         /*카테고리 속 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
@@ -78,22 +77,18 @@ public class KioskMenu {
                             menu.getMenu(menuNo)
                                     .orElseThrow(() -> new IllegalArgumentException("선택하신 번호와 일치하는 메뉴가 없습니다.")); /*옵셔널이라 에러문 추가*/
                     cart.addCartMap(menuNo, selectedItem);
-                    cart.addCartCount(menuNo, count);
-                    System.out.println("장바구니");
+                    cart.addCartCount(menuNo);
 
-                    /*장바구니 현재 상태안내문*/
-                    cartState(cart, menuNo);
+                    cartState(cart);/*장바구니 현재 상태안내문*/
                     break;
                 } else if (selectNo == 2) {
                     MenuItem selectedItem =
                             menu.getMenu(menuNo)
                                     .orElseThrow(() -> new IllegalArgumentException("선택하신 번호와 일치하는 메뉴가 없습니다.")); /*옵셔널이라 에러문 추가*/
 
-                    cart.subCartCount(menuNo, count);
-                    System.out.println("장바구니");
+                    cart.subCartCount(menuNo);
 
-                    /*장바구니 현재 상태안내문*/
-                    cartState(cart, menuNo);
+                    cartState(cart);/*장바구니 현재 상태안내문*/
                     break;
                 }
                 else if (selectNo == 3) {
@@ -109,7 +104,8 @@ public class KioskMenu {
     }
 
     /*장바구니 현재 상태 안내매서드*/
-    private static void cartState(Cart cart, double menuNo) {
+    public static void cartState(Cart cart) {
+        System.out.println("장바구니");
         for(Map.Entry<Double, MenuItem> entryCart : cart.getCartMap().entrySet()){
              Double key = entryCart.getKey();
              MenuItem menuItem = entryCart.getValue();
