@@ -51,7 +51,6 @@ public class Cart {
             this.cartCount.remove(key);
             this.cartMap.remove(key);
             System.out.println("선택하신 상품이 장바구니에 담겨있지 않습니다.");
-            return;
         }
     }
 

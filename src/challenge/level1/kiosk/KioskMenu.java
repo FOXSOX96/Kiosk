@@ -97,8 +97,11 @@ public class KioskMenu {
                     selectNo = -1; /*0 입력할 수 있으니 초기화*/
                     System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
                 }
+
+
             }
 
+            cartState(cart);/*장바구니 현재 상태안내문*/
         }
         return cart;
     }

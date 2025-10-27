@@ -15,7 +15,7 @@ public class Main {
         /*속성*/
         Menu menu = new Menu();
         KioskCategory kioskCategory = new KioskCategory();
-        KioskMenu kioskMenu = new KioskMenu();
+
         Cart cart = new Cart();
 
         double selectNo = -1; /*매번 새로 설정하는 변수*/
@@ -25,7 +25,7 @@ public class Main {
             /*KioskCategory클래스 실행 반복문*/
             while (selectNo != 0) {
 
-                /*1.프로그램 시작지점*/
+                /*Main1.프로그램 시작지점*/
                 System.out.println("안녕하세요 SHAKESHACK입니다.");
                 System.out.println("키오스크를 실행하시겠습니까?");
                 System.out.printf("%-4s | %-14s\n",
@@ -40,14 +40,8 @@ public class Main {
                     System.out.println("프로그램을 종료합니다.\n");
                 } else if (selectNo == 1) {
 
-                    /*2.카테고리 선택지점 : categoryNo를 받아옴*/
-                    double categoryNo = kioskCategory.selectCategory(menu.getCategoryAll(), sc, menu);
-
-                    /*3.메뉴 선택지점 : 카테고리 선택해야 메뉴선택으로 넘어감*/
-                    if (categoryNo != -1) {
-                        /*KioskMenu클래스 실행 반복문*/
-                        cart = kioskMenu.selectMenu(menu.getMenuAll(), sc, menu, categoryNo, cart);
-                    }
+                    /*Main2.카테고리 선택지점*/
+                    kioskCategory.selectCategory(menu.getCategoryAll(), sc, menu, cart);
 
                 } else {
                     System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
