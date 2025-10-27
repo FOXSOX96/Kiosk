@@ -21,6 +21,7 @@ public class KioskMenu {
     public Cart selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo, Cart cart) {
     double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
     double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
+        int count = -1; /*형식상 담아둔 카트 수량: 키 값이 없으면 1로 생성함*/
 
         /*카테고리 속 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
@@ -65,9 +66,10 @@ public class KioskMenu {
             /*장바구니 담기 Cart.java*/
             selectNo = -1; /*초기화*/
             while (selectNo != 2) {
-                System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
-                System.out.println("1. 확인");
-                System.out.println("2. 취소");
+                System.out.println("위 메뉴를 장바구니에 담으시겠습니까?");
+                System.out.println("1. 담기");
+                System.out.println("2. 빼기");
+                System.out.println("3. 취소");
                 /*스캐너입력-selectNo할당*/
                 selectNo = Main.getSelectNo(sc);
 
@@ -75,17 +77,26 @@ public class KioskMenu {
                     MenuItem selectedItem =
                             menu.getMenu(menuNo)
                                     .orElseThrow(() -> new IllegalArgumentException("선택하신 번호와 일치하는 메뉴가 없습니다.")); /*옵셔널이라 에러문 추가*/
-
                     cart.addCartMap(menuNo, selectedItem);
+                    cart.addCartCount(menuNo, count);
                     System.out.println("장바구니");
 
-
-                   for(MenuItem menuItem : cart.getCartMap().values()){
-                       System.out.printf("%-14s (%4.1f)\n",
-                               menuItem.getMenuName(), menuItem.getMenuPrice());
-                   }
-                   break;
+                    /*장바구니 현재 상태안내문*/
+                    cartState(cart, menuNo);
+                    break;
                 } else if (selectNo == 2) {
+                    MenuItem selectedItem =
+                            menu.getMenu(menuNo)
+                                    .orElseThrow(() -> new IllegalArgumentException("선택하신 번호와 일치하는 메뉴가 없습니다.")); /*옵셔널이라 에러문 추가*/
+
+                    cart.subCartCount(menuNo, count);
+                    System.out.println("장바구니");
+
+                    /*장바구니 현재 상태안내문*/
+                    cartState(cart, menuNo);
+                    break;
+                }
+                else if (selectNo == 3) {
                     break;
                 } else {
                     selectNo = -1; /*0 입력할 수 있으니 초기화*/
@@ -95,5 +106,15 @@ public class KioskMenu {
 
         }
         return cart;
+    }
+
+    /*장바구니 현재 상태 안내매서드*/
+    private static void cartState(Cart cart, double menuNo) {
+        for(Map.Entry<Double, MenuItem> entryCart : cart.getCartMap().entrySet()){
+             Double key = entryCart.getKey();
+             MenuItem menuItem = entryCart.getValue();
+            System.out.printf("%-14s (%4.1f) 수량: %d\n",
+                    menuItem.getMenuName(), menuItem.getMenuPrice(), cart.getCartCount(key).orElse(0));
+        }
     }
 }

@@ -16,7 +16,7 @@ public class Main {
         Menu menu = new Menu();
         KioskCategory kioskCategory = new KioskCategory();
         KioskMenu kioskMenu = new KioskMenu();
-        Cart cart = new Cart(new LinkedHashMap<>());
+        Cart cart = new Cart();
 
         double selectNo = -1; /*매번 새로 설정하는 변수*/
 
