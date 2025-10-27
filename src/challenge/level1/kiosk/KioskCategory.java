@@ -4,6 +4,7 @@ import challenge.level1.Main;
 import challenge.level1.Menu;
 
 import java.text.DecimalFormat;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -54,12 +55,11 @@ public class KioskCategory {
                 );
             } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+1) {
                 selectNo = -1;/*초기화*/
-                System.out.println("장바구니의 메뉴를 주문합니다.");
+                    System.out.println("장바구니의 메뉴를 주문합니다.");
             } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size()+2) {
                 selectNo = -1;/*초기화*/
                 System.out.println("장바구니를 비웁니다.");
-
-
+                cart.getCartMap().clear();
             }else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
             }

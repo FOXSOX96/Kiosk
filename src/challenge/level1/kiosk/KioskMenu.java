@@ -64,7 +64,7 @@ public class KioskMenu {
 
             /*장바구니 담기 Cart.java*/
             selectNo = -1; /*초기화*/
-            while (selectNo != 2) {
+            while (selectNo != 3) {
                 System.out.println("위 메뉴를 장바구니에 담으시겠습니까?");
                 System.out.println("1. 담기");
                 System.out.println("2. 빼기");

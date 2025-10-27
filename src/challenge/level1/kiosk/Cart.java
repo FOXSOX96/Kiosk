@@ -17,7 +17,7 @@ public class Cart {
     }
 
     /*기능*/
-    /*cartMap 기능*/
+    /*1.cartMap 기능*/
     /*게터*/
     public Map<Double, MenuItem> getCartMap() {
         return cartMap;
@@ -27,12 +27,11 @@ public class Cart {
     public void addCartMap(Double key, MenuItem menuItem) {
         this.cartMap.put(key, menuItem);
     }
-
     public void setCartMap(Map<Double, MenuItem> cartMap) {
         this.cartMap = cartMap;
     }
 
-    /*cartCount 기능*/
+    /*2.cartCount 기능*/
     /*담기*/
     public void addCartCount(Double key) {
         this.cartCount.putIfAbsent(key, 0);
