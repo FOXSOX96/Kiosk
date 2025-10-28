@@ -18,7 +18,6 @@ public class KioskStep3Orders {
     public void selectOrders(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, Cart cart, Discount discount) {
         total = 0; /*초기화*/
         DecimalFormat df = new DecimalFormat("#.#");
-        DecimalFormat df2 = new DecimalFormat("#");
 
 
         for (Map.Entry<Double, MenuItem> entry : cart.getCartMap().entrySet()) {
@@ -45,15 +44,29 @@ public class KioskStep3Orders {
                         i, discountType, discountPercent + " %");
             }
 
+            selectNo = Main.getSelectNo(sc);
+            switch ((int) selectNo) {
+                case 1:
+                   total = DiscountType.국가유공자.discountedPrice(total);
+                    break;
+                case 2:
+                    total = DiscountType.군인.discountedPrice(total);
+                    break;
+                case 3:
+                    total = DiscountType.학생.discountedPrice(total);
+                    break;
+                case 4:
+                    total = DiscountType.일반.discountedPrice(total);
+                    break;
+                default:
+                    total = DiscountType.일반.discountedPrice(total);
+                    break;
+            }
 
-            System.out.println("\n주문이 완료되었습니다. 금액은 w "+ df.format(total) + " 입니다.");
+            System.out.println("\n주문이 완료되었습니다. 금액은 w " + total + " 입니다.\n");
             cart.cartClear();
 
-    /*selectNo = Main.getSelectNo(sc);
-            switch((int)selectNo) {
-                case 1: discount.
-                case 1:
-            }*/
+
             return;
         } else if (selectNo == 2) {
             return;

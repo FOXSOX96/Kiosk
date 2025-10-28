@@ -20,9 +20,8 @@ this.discount = discount;
         return discount;
     }
     /*할인율 계산*/
-/*    public double discountCalcuate(int discount){
-        this.discount = discount;
-        return discount * discount;
-    }*/
+    public double discountedPrice(double price){
+        return price * ( 1 - this.discount/100.00);
+    }
 
 }
