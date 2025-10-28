@@ -57,5 +57,8 @@ public class Cart {
     public Optional<Integer> getCartCount(Double key) {
         return Optional.ofNullable(cartCount.get(key));
     }
+    public Map<Double, Integer> getCartCountMap() {
+        return cartCount;
+    }
 
 }
