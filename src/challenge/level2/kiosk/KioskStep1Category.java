@@ -11,7 +11,6 @@ import static challenge.level2.kiosk.KioskStep2Menu.cartState;
 public class KioskStep1Category {
     KioskStep2Menu kioskStep2Menu = new KioskStep2Menu();
     KioskStep3Orders kioskStep3Orders = new KioskStep3Orders();
-    Discount discount = new Discount();
 
     /*카테고리 선택 반복문*/
     public void selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu, Cart cart) {
@@ -60,7 +59,7 @@ public class KioskStep1Category {
                 cartState(cart); /*장바구니 현재 상태안내문*/
 
                 // - Step3.메뉴 선택지점 : 카테고리 선택해야 메뉴선택으로 넘어감
-                kioskStep3Orders.selectOrders(menu.getMenuAll(), sc, menu, cart, discount);
+                kioskStep3Orders.selectOrders(menu.getMenuAll(), sc, menu, cart);
             } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size() + 2) {/*장바구니에 메뉴가 담겨있을 때만, 장바구니비우기 선택가능*/
                 selectNo = -1;/*초기화*/
                 System.out.println("장바구니를 비웁니다.");

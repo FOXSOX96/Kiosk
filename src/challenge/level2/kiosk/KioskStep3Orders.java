@@ -15,7 +15,7 @@ public class KioskStep3Orders {
 
     /*생성자*/
     /*주문내역과 총액계산*/
-    public void selectOrders(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, Cart cart, Discount discount) {
+    public void selectOrders(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, Cart cart) {
         total = 0; /*초기화*/
         DecimalFormat df = new DecimalFormat("#.#");
 
@@ -29,10 +29,10 @@ public class KioskStep3Orders {
         System.out.println("\n[ Total ]");
         System.out.println("w " + df.format(total));
 
-        /*주문시 할인정보 제공*/
         System.out.println("\n1. 주문");
         System.out.println("2. 메뉴판");
 
+        /*주문시 할인정보 제공*/
         selectNo = Main.getSelectNo(sc);
         if (selectNo == 1) {
             System.out.println("할인정보를 입력해주세요.");
@@ -44,6 +44,7 @@ public class KioskStep3Orders {
                         i, discountType, discountPercent + " %");
             }
 
+            /*할인정보에 따른 할입된 Total 출력*/
             selectNo = Main.getSelectNo(sc);
             switch ((int) selectNo) {
                 case 1:
