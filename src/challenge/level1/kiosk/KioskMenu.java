@@ -55,16 +55,18 @@ public class KioskMenu {
                 menu.getMenu(selectNo).ifPresentOrElse(
                         item -> System.out.printf("선택한 메뉴 : %-14s | W %4.1f | - %s\n",
                                 item.getMenuName(), item.getMenuPrice(), item.getMenuDetail()),
-                        () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
+                        () -> { throw new IllegalArgumentException("메뉴와 일치하는 숫자를 입력해야 합니다.");
+                        }
                 );
             } else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
+                selectNo = -1; /*초기화*/
             }
 
 
             /*장바구니 담기 Cart.java*/
-            selectNo = -1; /*초기화*/
-            while (selectNo != 3) {
+
+            while (selectNo != -1) {
                 System.out.println("위 메뉴를 장바구니에 담으시겠습니까?");
                 System.out.println("1. 담기");
                 System.out.println("2. 빼기");
