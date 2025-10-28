@@ -6,14 +6,15 @@ import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Scanner;
 
-import static challenge.level2.kiosk.KioskStep2Menu.cartState;
+import static challenge.level2.kiosk.KioskMenu.cartState;
 
-public class KioskStep1Category {
-    KioskStep2Menu kioskStep2Menu = new KioskStep2Menu();
-    KioskStep3Orders kioskStep3Orders = new KioskStep3Orders();
+public class KioskCategory {
+    KioskMenu kioskMenu = new KioskMenu();
+    KioskOrders kioskOrders = new KioskOrders();
+    InputSc inputSc = new InputSc();
 
     /*카테고리 선택 반복문*/
-    public void selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu, Cart cart) {
+    public void selectCategory(Map<Double, String> getCategoryAll, Menu menu, Cart cart) {
         /*속성*/
         double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
         double categoryNo = -1; /*카테고리번호*/ /*재사용하는 변수*/
@@ -42,7 +43,7 @@ public class KioskStep1Category {
 
             /*스캐너입력-selectNo할당*/
             System.out.println("메뉴의 번호를 선택해주세요");
-            selectNo = Main.getSelectNo(sc);
+            selectNo = inputSc.getSelectNo();
 
             /*메뉴번호선택-categoryNo할당*/
             if (selectNo == 0) {
@@ -59,7 +60,7 @@ public class KioskStep1Category {
                 cartState(cart); /*장바구니 현재 상태안내문*/
 
                 // - Step3.메뉴 선택지점 : 카테고리 선택해야 메뉴선택으로 넘어감
-                kioskStep3Orders.selectOrders(menu.getMenuAll(), sc, menu, cart);
+                kioskOrders.selectOrders(menu.getMenuAll(), menu, cart);
             } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size() + 2) {/*장바구니에 메뉴가 담겨있을 때만, 장바구니비우기 선택가능*/
                 selectNo = -1;/*초기화*/
                 System.out.println("장바구니를 비웁니다.");
@@ -71,7 +72,7 @@ public class KioskStep1Category {
             // - Step2.메뉴 선택지점 : 카테고리 선택해야 메뉴선택으로 넘어감
             if (categoryNo != -1) {
                 /*KioskMenu클래스 실행 반복문*/
-                cart = kioskStep2Menu.selectMenu(menu.getMenuAll(), sc, menu, categoryNo, cart);
+                cart = kioskMenu.selectMenu(menu.getMenuAll(), menu, categoryNo, cart);
             }
         }
 

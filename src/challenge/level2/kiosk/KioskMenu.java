@@ -8,15 +8,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 
-public class KioskStep2Menu {
+public class KioskMenu {
 
     /*속성*/
+    InputSc inputSc = new InputSc();
 
     /*생성자*/
     /*기능*/
     /*메뉴선택 반복문*/
 
-    public Cart selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo, Cart cart) {
+    public Cart selectMenu(Map<Double, MenuItem> getMenuAll, Menu menu, double categoryNo, Cart cart) {
         double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
         double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
 
@@ -42,7 +43,7 @@ public class KioskStep2Menu {
 
             /*스캐너입력-selectNo할당*/
             System.out.println("메뉴의 번호를 선택해주세요");
-            selectNo = Main.getSelectNo(sc);
+            selectNo = inputSc.getSelectNo();
 
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
@@ -71,7 +72,7 @@ public class KioskStep2Menu {
                 System.out.println("2. 빼기");
                 System.out.println("3. 취소");
                 /*스캐너입력-selectNo할당*/
-                selectNo = Main.getSelectNo(sc);
+                selectNo = inputSc.getSelectNo();
 
                 if (selectNo == 1) {
                     MenuItem selectedItem =

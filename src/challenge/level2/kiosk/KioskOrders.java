@@ -6,16 +6,17 @@ import java.text.DecimalFormat;
 import java.util.Map;
 import java.util.Scanner;
 
-public class KioskStep3Orders {
+public class KioskOrders {
 
 
     /*속성*/
+    InputSc inputSc = new InputSc();
     double total = 0;
     double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
 
     /*생성자*/
     /*주문내역과 총액계산*/
-    public void selectOrders(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, Cart cart) {
+    public void selectOrders(Map<Double, MenuItem> getMenuAll, Menu menu, Cart cart) {
         total = 0; /*초기화*/
         DecimalFormat df = new DecimalFormat("#.#");
 
@@ -33,7 +34,7 @@ public class KioskStep3Orders {
         System.out.println("2. 메뉴판");
 
         /*주문시 할인정보 제공*/
-        selectNo = Main.getSelectNo(sc);
+        selectNo = inputSc.getSelectNo();
         if (selectNo == 1) {
             System.out.println("할인정보를 입력해주세요.");
             int i = 0;
@@ -45,7 +46,7 @@ public class KioskStep3Orders {
             }
 
             /*할인정보에 따른 할입된 Total 출력*/
-            selectNo = Main.getSelectNo(sc);
+            selectNo = inputSc.getSelectNo();
             switch ((int) selectNo) {
                 case 1:
                     total = DiscountType.국가유공자.discountedPrice(total);
