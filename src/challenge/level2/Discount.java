@@ -10,6 +10,7 @@ public class Discount {
     /*속성*/
     private Map<String, Integer> discountMap = new LinkedHashMap<>();
 
+
     /*생성자*/
     public Discount() {
         discountMap.put("국가유공자", 10);

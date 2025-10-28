@@ -27,32 +27,29 @@ public class KioskStep3Orders {
             total += menuItem.getMenuPrice() * cart.getCartCount(key).orElse(null);
         }
 
-        System.out.println("");
-        System.out.println("[ Total ]");
+        System.out.println("\n[ Total ]");
         System.out.println("w " + df.format(total));
 
         /*주문시 할인정보 제공*/
-        System.out.println("");
-        System.out.println("1. 주문");
+        System.out.println("\n1. 주문");
         System.out.println("2. 메뉴판");
 
         selectNo = Main.getSelectNo(sc);
         if (selectNo == 1) {
-            System.out.println("주문이 완료되었습니다. 금액은 w "+ df.format(total) + " 입니다.");
-            cart.getCartMap().clear();
-            cart.getCartCountMap().clear();
-
             System.out.println("할인정보를 입력해주세요.");
             int i = 0;
-            for (Map.Entry<String, Integer> entry : discount.getDiscountMap().entrySet()) {
+            for (DiscountType discountType : DiscountType.values()) {
                 i += 1;
-                String key = entry.getKey();
-                Integer discountPercent = entry.getValue();
-                System.out.printf("%-1d. %-6s : %-14s\n",
-                        i, key, discountPercent + "%");
+                Integer discountPercent = discountType.getDiscount();
+                System.out.printf("%-1d. %-8s : %-5s\n",
+                        i, discountType, discountPercent + " %");
             }
 
-    /*        selectNo = Main.getSelectNo(sc);
+
+            System.out.println("\n주문이 완료되었습니다. 금액은 w "+ df.format(total) + " 입니다.");
+            cart.cartClear();
+
+    /*selectNo = Main.getSelectNo(sc);
             switch((int)selectNo) {
                 case 1: discount.
                 case 1:

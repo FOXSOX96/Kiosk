@@ -59,4 +59,10 @@ public class Cart {
         return cartCount;
     }
 
+    /*3.공통 기능*/
+    /*cart 맵 일괄 삭제*/
+    public void cartClear() {
+        cartMap.clear();
+        cartCount.clear();
+    }
 }

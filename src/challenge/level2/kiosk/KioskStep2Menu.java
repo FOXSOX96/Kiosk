@@ -1,9 +1,6 @@
 package challenge.level2.kiosk;
 
-import challenge.level2.Cart;
-import challenge.level2.Main;
-import challenge.level2.Menu;
-import challenge.level2.MenuItem;
+import challenge.level2.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
