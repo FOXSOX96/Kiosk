@@ -48,7 +48,7 @@ public class KioskStep3Orders {
             selectNo = Main.getSelectNo(sc);
             switch ((int) selectNo) {
                 case 1:
-                   total = DiscountType.국가유공자.discountedPrice(total);
+                    total = DiscountType.국가유공자.discountedPrice(total);
                     break;
                 case 2:
                     total = DiscountType.군인.discountedPrice(total);

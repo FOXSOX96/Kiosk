@@ -17,8 +17,8 @@ public class KioskStep2Menu {
     /*메뉴선택 반복문*/
 
     public Cart selectMenu(Map<Double, MenuItem> getMenuAll, Scanner sc, Menu menu, double categoryNo, Cart cart) {
-    double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
-    double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
+        double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
+        double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
 
         /*카테고리 속 메뉴선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
@@ -53,7 +53,8 @@ public class KioskStep2Menu {
                 menu.getMenu(selectNo).ifPresentOrElse(
                         item -> System.out.printf("선택한 메뉴 : %-14s | W %4.1f | - %s\n",
                                 item.getMenuName(), item.getMenuPrice(), item.getMenuDetail()),
-                        () -> { throw new IllegalArgumentException("메뉴와 일치하는 숫자를 입력해야 합니다.");
+                        () -> {
+                            throw new IllegalArgumentException("메뉴와 일치하는 숫자를 입력해야 합니다.");
                         }
                 );
             } else {
@@ -90,8 +91,7 @@ public class KioskStep2Menu {
 
                     cartState(cart);/*장바구니 현재 상태안내문*/
                     break;
-                }
-                else if (selectNo == 3) {
+                } else if (selectNo == 3) {
                     break;
                 } else {
                     selectNo = -1; /*0 입력할 수 있으니 초기화*/
@@ -105,9 +105,9 @@ public class KioskStep2Menu {
     /*장바구니 현재 상태 안내매서드*/
     public static void cartState(Cart cart) {
         System.out.println("[ 장바구니 ]");
-        for(Map.Entry<Double, MenuItem> entryCart : cart.getCartMap().entrySet()){
-             Double key = entryCart.getKey();
-             MenuItem menuItem = entryCart.getValue();
+        for (Map.Entry<Double, MenuItem> entryCart : cart.getCartMap().entrySet()) {
+            Double key = entryCart.getKey();
+            MenuItem menuItem = entryCart.getValue();
             System.out.printf("%-14s | W %4.1f | 수량: %d\n",
                     menuItem.getMenuName(), menuItem.getMenuPrice(), cart.getCartCount(key).orElse(0));
         }

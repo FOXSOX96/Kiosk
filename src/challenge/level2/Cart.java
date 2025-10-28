@@ -25,6 +25,7 @@ public class Cart {
     public void addCartMap(Double key, MenuItem menuItem) {
         this.cartMap.put(key, menuItem);
     }
+
     public void setCartMap(Map<Double, MenuItem> cartMap) {
         this.cartMap = cartMap;
     }
@@ -33,17 +34,17 @@ public class Cart {
     /*담기*/
     public void addCartCount(Double key) {
         this.cartCount.putIfAbsent(key, 0);
-        this.cartCount.replace(key, this.cartCount.get(key)+1);
+        this.cartCount.replace(key, this.cartCount.get(key) + 1);
     }
 
     /*뺴기*/
     public void subCartCount(Double key) {
-        try{
-        this.cartCount.replace(key, this.cartCount.get(key)-1);
-        if(this.cartCount.get(key) == 0) {
-            this.cartCount.remove(key);
-            this.cartMap.remove(key);
-        }
+        try {
+            this.cartCount.replace(key, this.cartCount.get(key) - 1);
+            if (this.cartCount.get(key) == 0) {
+                this.cartCount.remove(key);
+                this.cartMap.remove(key);
+            }
         } catch (NullPointerException e) {
             this.cartCount.remove(key);
             this.cartMap.remove(key);
@@ -55,6 +56,7 @@ public class Cart {
     public Optional<Integer> getCartCount(Double key) {
         return Optional.ofNullable(cartCount.get(key));
     }
+
     public Map<Double, Integer> getCartCountMap() {
         return cartCount;
     }

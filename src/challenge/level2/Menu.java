@@ -41,6 +41,7 @@ public class Menu {
     public Optional<MenuItem> getMenu(Double MenuID) {
         return Optional.ofNullable(menuMap.get(MenuID));
     }
+
     public Optional<String> getCategory(Double CategoryID) {
         return Optional.ofNullable(categoryMap.get(CategoryID));
     }
@@ -49,6 +50,7 @@ public class Menu {
     public Map<Double, MenuItem> getMenuAll() {
         return menuMap;
     }
+
     public Map<Double, String> getCategoryAll() {
         return categoryMap;
     }
@@ -57,6 +59,7 @@ public class Menu {
     public void setMenuMap(Map<Double, MenuItem> menuMap) {
         this.menuMap = menuMap;
     }
+
     public void setCategoryMap(Map<Double, String> categoryMap) {
         this.categoryMap = categoryMap;
     }
