@@ -13,6 +13,7 @@ import static challenge.level1.kiosk.KioskMenu.cartState;
 public class KioskCategory {
     KioskMenu kioskMenu = new KioskMenu();
     Orders orders = new Orders();
+    Discount discount = new Discount();
 
     /*카테고리 선택 반복문*/
     public void selectCategory(Map<Double, String> getCategoryAll, Scanner sc, Menu menu, Cart cart) {
@@ -56,11 +57,11 @@ public class KioskCategory {
                         item -> System.out.println(item + "을 선택하였습니다."),
                         () -> System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.")
                 );
-            } /*else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size() + 1) {*//*장바구니에 메뉴가 담겨있을 때만, 주문 선택가능*//*
-                selectNo = -1;*//*초기화*//*
-                cartState(cart);*//*장바구니 현재 상태안내문*//*
-                orders.selectOrders(menu.getMenuAll(), sc, menu, cart);
-            }*/ else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size() + 2) {/*장바구니에 메뉴가 담겨있을 때만, 장바구니비우기 선택가능*/
+            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size() + 1) {/*장바구니에 메뉴가 담겨있을 때만, 주문 선택가능*/
+                selectNo = -1;/*초기화*/
+                cartState(cart);/*장바구니 현재 상태안내문*/
+                orders.selectOrders(menu.getMenuAll(), sc, menu, cart, discount);
+            } else if (!cart.getCartMap().isEmpty() && selectNo == getCategoryAll.size() + 2) {/*장바구니에 메뉴가 담겨있을 때만, 장바구니비우기 선택가능*/
                 selectNo = -1;/*초기화*/
                 System.out.println("장바구니를 비웁니다.");
                 cart.getCartMap().clear();
