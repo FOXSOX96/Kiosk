@@ -42,7 +42,10 @@ public class Orders {
 
         selectNo = Main.getSelectNo(sc);
         if (selectNo == 1) {
-            System.out.println("할인정보를 입력해주세요.");
+            System.out.println("주문이 완료되었습니다. 금액은 w "+ df.format(total) + " 입니다.");
+            cart.getCartMap().clear();
+            cart.getCartCountMap().clear();
+           /* System.out.println("할인정보를 입력해주세요.");
             int i = 0;
             for (Map.Entry<String, Integer> entry : discount.getDiscountMap().entrySet()) {
                 i += 1;
@@ -50,7 +53,7 @@ public class Orders {
                 Integer discountPercent = entry.getValue();
                 System.out.printf("%-1d. %-6s : %-14s\n",
                         i, key, discountPercent + "%");
-            }
+            }*/
 
     /*        selectNo = Main.getSelectNo(sc);
             switch((int)selectNo) {
