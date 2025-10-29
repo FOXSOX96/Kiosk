@@ -20,7 +20,7 @@ public class KioskOrders {
     /*주문내역과 총액계산*/
     public void selectOrders(Cart cart) {
         total = 0; /*초기화*/
-        DecimalFormat df = new DecimalFormat("#.#");
+        DecimalFormat df = new DecimalFormat("#.####");
 
         cart.getCartMap().entrySet().stream()
                 .forEach(entry -> total += entry.getValue().getMenuPrice() * cart.getCartCount(entry.getKey()).orElse(0));
@@ -63,7 +63,7 @@ public class KioskOrders {
                     break;
             }
 
-            System.out.println("\n주문이 완료되었습니다. 금액은 w " + total + " 입니다.\n");
+            System.out.println("\n주문이 완료되었습니다. 금액은 w " + df.format(total) + " 입니다.\n");
             cart.cartClear();
 
             return;

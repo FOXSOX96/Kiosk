@@ -1,5 +1,7 @@
 package challenge.level2;
 
+import java.text.DecimalFormat;
+
 public enum DiscountType {
     /*속성*/
     국가유공자(10),
@@ -8,6 +10,7 @@ public enum DiscountType {
     일반(0);
 
     private final int discount;
+DecimalFormat df = new DecimalFormat("#.####");
 
     /*생성자*/
     DiscountType(int discount) {
