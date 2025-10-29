@@ -1,5 +1,7 @@
 package challenge.level2;
 
+import challenge.level2.Menu.MenuItem;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;

@@ -2,7 +2,7 @@ package challenge.level2.kiosk;
 
 import challenge.level2.Cart;
 import challenge.level2.InputSc;
-import challenge.level2.Menu;
+import challenge.level2.Menu.Menu;
 
 import java.text.DecimalFormat;
 

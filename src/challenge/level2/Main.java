@@ -1,6 +1,7 @@
 package challenge.level2;
 
 
+import challenge.level2.Menu.Menu;
 import challenge.level2.kiosk.KioskCategory;
 
 public class Main {

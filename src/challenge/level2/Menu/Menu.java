@@ -1,10 +1,10 @@
-package challenge.level2;
+package challenge.level2.Menu;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class Menu {
+public class Menu implements MenuRule {
 
     /*메뉴 아이디 할당 : MenuID =double*/
     private Map<Double, MenuItem> menuMap = new LinkedHashMap<>();
@@ -38,30 +38,52 @@ public class Menu {
 
 
     /*게터*/
-    public Optional<MenuItem> getMenu(Double MenuID) {
-        return Optional.ofNullable(menuMap.get(MenuID));
-    }
 
     public Optional<String> getCategory(Double CategoryID) {
         return Optional.ofNullable(categoryMap.get(CategoryID));
     }
 
-    /*게터 전체*/
-    public Map<Double, MenuItem> getMenuAll() {
-        return menuMap;
+    public Optional<MenuItem> getMenu(Double MenuID) {
+        return Optional.ofNullable(menuMap.get(MenuID));
     }
+
+    /*게터 전체*/
 
     public Map<Double, String> getCategoryAll() {
         return categoryMap;
     }
 
+    public Map<Double, MenuItem> getMenuAll() {
+        return menuMap;
+    }
+
     /*세터*/
+    public void setCategoryMap(Map<Double, String> categoryMap) {
+        this.categoryMap = categoryMap;
+    }
+
     public void setMenuMap(Map<Double, MenuItem> menuMap) {
         this.menuMap = menuMap;
     }
 
-    public void setCategoryMap(Map<Double, String> categoryMap) {
-        this.categoryMap = categoryMap;
+    @Override
+    /* 카테고리 추가는 1.0 단위로만 생성되어야 함 */
+    public void addCategory(String categoryName) {
+        double categoryKey = categoryMap.isEmpty() ? 1.0 : categoryMap.keySet().stream()
+                .max(Double::compareTo).get() + 1.0;
+
+        categoryMap.put(categoryKey, categoryName);
+    }
+
+    @Override
+    /* 메뉴 추가는 카테고리의 정수 x를 기준으로 x.01, x.02 ... 형태여야 함 */
+    public void addMenu(double categoryKey, String menuName, double menuPrice, String menuDetail) {
+
+        double menuKey = menuMap.isEmpty() ? categoryKey + 0.01 : menuMap.keySet().stream()
+                .filter(key -> key >= categoryKey && key < categoryKey + 1.0)
+                .max(Double::compareTo).map(key -> key + 0.01)
+                .orElse(categoryKey + 0.01);
+        menuMap.put(menuKey, new MenuItem(menuName, menuPrice, menuDetail));
     }
 
 }

@@ -2,8 +2,8 @@ package challenge.level2.kiosk;
 
 import challenge.level2.Cart;
 import challenge.level2.InputSc;
-import challenge.level2.Menu;
-import challenge.level2.MenuItem;
+import challenge.level2.Menu.Menu;
+import challenge.level2.Menu.MenuItem;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

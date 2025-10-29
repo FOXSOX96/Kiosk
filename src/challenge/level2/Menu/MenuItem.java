@@ -1,4 +1,4 @@
-package challenge.level2;
+package challenge.level2.Menu;
 
 public class MenuItem {
 
