@@ -1,23 +1,26 @@
 package challenge.level2.kiosk;
 
-import challenge.level2.*;
+import challenge.level2.Cart;
+import challenge.level2.InputSc;
+import challenge.level2.Menu;
+import challenge.level2.MenuItem;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
-import java.util.Scanner;
 
 
 public class KioskMenu {
 
     /*속성*/
     InputSc inputSc = new InputSc();
+    Menu menu = new Menu();
 
     /*생성자*/
     /*기능*/
     /*메뉴선택 반복문*/
 
-    public Cart selectMenu(Map<Double, MenuItem> getMenuAll, Menu menu, double categoryNo, Cart cart) {
+    public Cart selectMenu(double categoryNo, Cart cart) {
         double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
         double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
 
@@ -28,7 +31,7 @@ public class KioskMenu {
             /*카테고리 속 메뉴나열*/
             /*categoryNo의 1의자리 값을 갖는 MenuNo만 필터*/
             /*사용자편의상 번호 선택을 정수로 변환하여 나타냄(1.01, 1.02, 1.03을 1,2,3으로 출력)*/
-            for (Map.Entry<Double, MenuItem> entry : getMenuAll.entrySet()) {
+            for (Map.Entry<Double, MenuItem> entry : menu.getMenuAll().entrySet()) {
                 Double key = entry.getKey();
                 BigDecimal keyD = BigDecimal.valueOf(key);
                 BigDecimal floor = keyD.setScale(0, RoundingMode.FLOOR);
@@ -48,7 +51,7 @@ public class KioskMenu {
             /*메뉴번호선택-menuNo할당*/
             if (selectNo == 0) {
                 return cart;
-            } else if (selectNo <= getMenuAll.size()) {
+            } else if (selectNo <= menu.getMenuAll().size()) {
                 selectNo = selectNo * 0.01 + categoryNo;  /*사용자편의상 정수를 입력시켰으므로 menuNo의 소수점에 입력값 넣음*/
                 menuNo = selectNo;
                 menu.getMenu(selectNo).ifPresentOrElse(

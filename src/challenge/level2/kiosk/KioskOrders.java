@@ -1,10 +1,13 @@
 package challenge.level2.kiosk;
 
-import challenge.level2.*;
+import challenge.level2.Cart;
+import challenge.level2.DiscountType;
+import challenge.level2.InputSc;
+import challenge.level2.Menu;
+import challenge.level2.MenuItem;
 
 import java.text.DecimalFormat;
 import java.util.Map;
-import java.util.Scanner;
 
 public class KioskOrders {
 
@@ -16,7 +19,7 @@ public class KioskOrders {
 
     /*생성자*/
     /*주문내역과 총액계산*/
-    public void selectOrders(Map<Double, MenuItem> getMenuAll, Menu menu, Cart cart) {
+    public void selectOrders(Cart cart) {
         total = 0; /*초기화*/
         DecimalFormat df = new DecimalFormat("#.#");
 
@@ -24,7 +27,7 @@ public class KioskOrders {
         for (Map.Entry<Double, MenuItem> entry : cart.getCartMap().entrySet()) {
             Double key = entry.getKey();
             MenuItem menuItem = entry.getValue();
-            total += menuItem.getMenuPrice() * cart.getCartCount(key).orElse(null);
+            total += menuItem.getMenuPrice() * cart.getCartCount(key).orElse(0);
         }
 
         System.out.println("\n[ Total ]");

@@ -9,7 +9,7 @@ public class Main {
         /*속성*/
         Menu menu = new Menu();
         KioskCategory kioskCategory = new KioskCategory();
-        Cart cart = new Cart();
+        Cart cart = new Cart(); /*공유해야하는 객체*/
         InputSc inputSc = new InputSc();
 
         double selectNo = -1; /*매번 새로 설정하는 변수*/
@@ -34,7 +34,7 @@ public class Main {
             } else if (selectNo == 1) {
 
                 // - Step1.카테고리 선택지점
-                kioskCategory.selectCategory(menu.getCategoryAll(), menu, cart);
+                kioskCategory.selectCategory(cart);
 
             } else {
                 System.out.println("메뉴와 일치하는 숫자를 입력해야 합니다.");
