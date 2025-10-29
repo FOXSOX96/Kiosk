@@ -52,7 +52,7 @@ public class KioskEdit {
                 System.out.println("새로 추가할 메뉴의 이름를 입력해주세요.");
                 inputSc.getString(); /*개행 제거용 빈 호출*/
                 String menuName = inputSc.getString();
-                System.out.println("새로 추가할 메뉴의 가격을 입력해주세요.(1.0 = 천원)");
+                System.out.println("새로 추가할 메뉴의 가격을 입력해주세요.(₩ 1.0 = 천원)");
                 double menuPrice = inputSc.getSelectNo();
                 System.out.println("새로 추가할 메뉴의 설명을 입력해주세요.");
                 inputSc.getString(); /*개행 제거용 빈 호출*/

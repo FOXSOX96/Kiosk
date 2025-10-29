@@ -74,7 +74,7 @@ public class Cart {
     public void cartState() {
         System.out.println("[ 장바구니 ]");
         getCartMap().entrySet().stream()
-                .forEach( entry ->   System.out.printf("%-14s | W %4.1f | 수량: %d\n",
+                .forEach( entry ->   System.out.printf("%-14s | ₩ %4.1f | 수량: %d\n",
                         entry.getValue().getMenuName(), entry.getValue().getMenuPrice(), getCartCount(entry.getKey()).orElse(0)));
         if (getCartMap().isEmpty()) {
             System.out.println("비어있음");

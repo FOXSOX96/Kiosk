@@ -20,13 +20,13 @@ public class KioskOrders {
     /*주문내역과 총액계산*/
     public void selectOrders(Cart cart) {
         total = 0; /*초기화*/
-        DecimalFormat df = new DecimalFormat("#.####");
+        DecimalFormat df = new DecimalFormat("#.####"); /*1원 단위까지 double의 부동소수점 오차 해결*/
 
         cart.getCartMap().entrySet().stream()
                 .forEach(entry -> total += entry.getValue().getMenuPrice() * cart.getCartCount(entry.getKey()).orElse(0));
 
         System.out.println("\n[ Total ]");
-        System.out.println("w " + df.format(total));
+        System.out.println("₩ " + df.format(total));
 
         System.out.println("\n1. 주문");
         System.out.println("2. 메뉴판");
@@ -63,7 +63,7 @@ public class KioskOrders {
                     break;
             }
 
-            System.out.println("\n주문이 완료되었습니다. 금액은 w " + df.format(total) + " 입니다.\n");
+            System.out.println("\n주문이 완료되었습니다. 금액은 ₩ " + df.format(total) + " 입니다.\n");
             cart.cartClear();
 
             return;

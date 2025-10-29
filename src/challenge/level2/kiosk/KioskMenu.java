@@ -44,7 +44,7 @@ public class KioskMenu {
                 selectNo = selectNo * 0.01 + categoryNo;  /*사용자편의상 정수를 입력시켰으므로 menuNo의 소수점에 입력값 넣음*/
                 menuNo = selectNo;
                 menu.getMenu(selectNo).ifPresentOrElse(
-                        item -> System.out.printf("선택한 메뉴 : %-14s | W %4.1f | - %s\n",
+                        item -> System.out.printf("선택한 메뉴 : %-14s | ₩ %4.1f | - %s\n",
                                 item.getMenuName(), item.getMenuPrice(), item.getMenuDetail()),
                         () -> {
                             throw new IllegalArgumentException("메뉴와 일치하는 숫자를 입력해야 합니다.");
@@ -103,7 +103,7 @@ public class KioskMenu {
             BigDecimal frac = keyD.subtract(floor);
             if (key > categoryNo && key < categoryNo + 1.0) {
                 MenuItem item = entry.getValue();
-                System.out.printf("%-4s | %-14s | W %4.1f | - %s\n",
+                System.out.printf("%-4s | %-14s | ₩ %4.1f | - %s\n",
                         frac.multiply(BigDecimal.TEN).multiply(BigDecimal.TEN).intValue() + ".", item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
             }
         }
