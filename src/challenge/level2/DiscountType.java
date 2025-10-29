@@ -10,7 +10,7 @@ public enum DiscountType {
     일반(0);
 
     private final int discount;
-DecimalFormat df = new DecimalFormat("#.####");
+    DecimalFormat df = new DecimalFormat("#.####"); /*1원 단위까지 double의 부동소수점 오차 해결*/
 
     /*생성자*/
     DiscountType(int discount) {

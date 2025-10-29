@@ -10,22 +10,19 @@ public class KioskCategory {
     KioskMenu kioskMenu = new KioskMenu();
     KioskOrders kioskOrders = new KioskOrders();
     InputSc inputSc = new InputSc();
-    Menu menu = new Menu();
+
 
     /*카테고리 선택 반복문*/
-    public void selectCategory(Cart cart) {
+    public void selectCategory(Menu menu , Cart cart) {
         /*속성*/
         double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
         double categoryNo = -1; /*카테고리번호*/ /*재사용하는 변수*/
         /* 카테고리 선택: 0이 입력되면 종료되는 반복문시작*/
         while (selectNo != 0) {
-            DecimalFormat df = new DecimalFormat("#");
-
             System.out.println("[ MAIN MENU ]");
             /*카테고리 나열*/
             /*사용자편의상 소수점제거하고 정수만 출력*/
-            menu.getCategoryAll().entrySet().stream().forEach(entry -> System.out.printf("%-4s | %-14s\n",
-                    df.format(entry.getKey()) + ".", entry.getValue()));
+            categoryArrange(menu);
             System.out.println("0. 종료");
             /*장바구니에 메뉴가 담겨있을 때만, 카테고리 마지막번호 다음번호로 출력*/
             if (!cart.getCartMap().isEmpty()) {
@@ -66,9 +63,15 @@ public class KioskCategory {
             // - Step2.메뉴 선택지점 : 카테고리 선택해야 메뉴선택으로 넘어감
             if (categoryNo != -1) {
                 /*KioskMenu클래스 실행 반복문*/
-                cart = kioskMenu.selectMenu(categoryNo, cart);
+                cart = kioskMenu.selectMenu(menu, categoryNo, cart);
             }
         }
 
+    }
+
+    public void categoryArrange(Menu menu) {
+        DecimalFormat df = new DecimalFormat("#");
+        menu.getCategoryAll().entrySet().stream().forEach(entry -> System.out.printf("%-4s | %-14s\n",
+                df.format(entry.getKey()) + ".", entry.getValue()));
     }
 }

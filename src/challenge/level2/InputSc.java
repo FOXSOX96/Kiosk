@@ -22,6 +22,11 @@ public class InputSc {
         }
         return selectNo;
     }
+    /*스캐너 문자열 입력*/
+    public String getString() {
+        return sc.nextLine();
+    }
+
 
     /*게터*/
     public Scanner getSc() {

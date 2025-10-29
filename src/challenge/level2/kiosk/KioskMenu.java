@@ -14,13 +14,12 @@ public class KioskMenu {
 
     /*속성*/
     InputSc inputSc = new InputSc();
-    Menu menu = new Menu();
 
     /*생성자*/
     /*기능*/
     /*메뉴선택 반복문*/
 
-    public Cart selectMenu(double categoryNo, Cart cart) {
+    public Cart selectMenu(Menu menu, double categoryNo, Cart cart) {
         double menuNo = -1; /*메뉴번호*/ /*매번 새로 설정하는 변수*/
         double selectNo = -1; /*번호선택*/ /*매번 새로 설정하는 변수*/
 
@@ -31,17 +30,7 @@ public class KioskMenu {
             /*카테고리 속 메뉴나열*/
             /*categoryNo의 1의자리 값을 갖는 MenuNo만 필터*/
             /*사용자편의상 번호 선택을 정수로 변환하여 나타냄(1.01, 1.02, 1.03을 1,2,3으로 출력)*/
-            for (Map.Entry<Double, MenuItem> entry : menu.getMenuAll().entrySet()) {
-                Double key = entry.getKey();
-                BigDecimal keyD = BigDecimal.valueOf(key);
-                BigDecimal floor = keyD.setScale(0, RoundingMode.FLOOR);
-                BigDecimal frac = keyD.subtract(floor);
-                if (key > categoryNo && key < categoryNo + 1.0) {
-                    MenuItem item = entry.getValue();
-                    System.out.printf("%-4s | %-14s | W %4.1f | - %s\n",
-                            frac.multiply(BigDecimal.TEN).multiply(BigDecimal.TEN).intValue() + ".", item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
-                }
-            }
+            menuArrange(menu, categoryNo);
             System.out.println("0. 선택완료");
 
             /*스캐너입력-selectNo할당*/
@@ -104,6 +93,20 @@ public class KioskMenu {
             }
         }
         return cart;
+    }
+
+    public void menuArrange(Menu menu, double categoryNo) {
+        for (Map.Entry<Double, MenuItem> entry : menu.getMenuAll().entrySet()) {
+            Double key = entry.getKey();
+            BigDecimal keyD = BigDecimal.valueOf(key);
+            BigDecimal floor = keyD.setScale(0, RoundingMode.FLOOR);
+            BigDecimal frac = keyD.subtract(floor);
+            if (key > categoryNo && key < categoryNo + 1.0) {
+                MenuItem item = entry.getValue();
+                System.out.printf("%-4s | %-14s | W %4.1f | - %s\n",
+                        frac.multiply(BigDecimal.TEN).multiply(BigDecimal.TEN).intValue() + ".", item.getMenuName(), item.getMenuPrice(), item.getMenuDetail());
+            }
+        }
     }
 
 }
