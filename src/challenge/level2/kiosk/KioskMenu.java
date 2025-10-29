@@ -84,7 +84,7 @@ public class KioskMenu {
                     cart.addCartMap(menuNo, selectedItem);
                     cart.addCartCount(menuNo);
 
-                    cartState(cart);/*장바구니 현재 상태안내문*/
+                    cart.cartState();/*장바구니 현재 상태안내문*/
                     break;
                 } else if (selectNo == 2) {
                     MenuItem selectedItem =
@@ -93,7 +93,7 @@ public class KioskMenu {
 
                     cart.subCartCount(menuNo);
 
-                    cartState(cart);/*장바구니 현재 상태안내문*/
+                    cart.cartState();/*장바구니 현재 상태안내문*/
                     break;
                 } else if (selectNo == 3) {
                     break;
@@ -106,17 +106,4 @@ public class KioskMenu {
         return cart;
     }
 
-    /*장바구니 현재 상태 안내매서드*/
-    public static void cartState(Cart cart) {
-        System.out.println("[ 장바구니 ]");
-        for (Map.Entry<Double, MenuItem> entryCart : cart.getCartMap().entrySet()) {
-            Double key = entryCart.getKey();
-            MenuItem menuItem = entryCart.getValue();
-            System.out.printf("%-14s | W %4.1f | 수량: %d\n",
-                    menuItem.getMenuName(), menuItem.getMenuPrice(), cart.getCartCount(key).orElse(0));
-        }
-        if (cart.getCartMap().isEmpty()) {
-            System.out.println("비어있음");
-        }
-    }
 }

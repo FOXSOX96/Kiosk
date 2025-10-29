@@ -6,8 +6,6 @@ import challenge.level2.Menu;
 
 import java.text.DecimalFormat;
 
-import static challenge.level2.kiosk.KioskMenu.cartState;
-
 public class KioskCategory {
     KioskMenu kioskMenu = new KioskMenu();
     KioskOrders kioskOrders = new KioskOrders();
@@ -52,7 +50,7 @@ public class KioskCategory {
                 );
             } else if (!cart.getCartMap().isEmpty() && selectNo == menu.getCategoryAll().size() + 1) { /*장바구니에 메뉴가 담겨있을 때만, 주문 선택가능*/
                 selectNo = -1; /*초기화*/
-                cartState(cart); /*장바구니 현재 상태안내문*/
+                cart.cartState(); /*장바구니 현재 상태안내문*/
 
                 // - Step3.메뉴 선택지점 : 카테고리 선택해야 메뉴선택으로 넘어감
                 kioskOrders.selectOrders(cart);
