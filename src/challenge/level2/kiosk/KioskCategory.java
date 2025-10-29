@@ -5,7 +5,6 @@ import challenge.level2.InputSc;
 import challenge.level2.Menu;
 
 import java.text.DecimalFormat;
-import java.util.Map;
 
 import static challenge.level2.kiosk.KioskMenu.cartState;
 
@@ -27,12 +26,8 @@ public class KioskCategory {
             System.out.println("[ MAIN MENU ]");
             /*카테고리 나열*/
             /*사용자편의상 소수점제거하고 정수만 출력*/
-            for (Map.Entry<Double, String> entry : menu.getCategoryAll().entrySet()) {
-                Double key = entry.getKey();
-                String item = entry.getValue();
-                System.out.printf("%-4s | %-14s\n",
-                        df.format(key) + ".", item);
-            }
+            menu.getCategoryAll().entrySet().stream().forEach(entry -> System.out.printf("%-4s | %-14s\n",
+                    df.format(entry.getKey()) + ".", entry.getValue()));
             System.out.println("0. 종료");
             /*장바구니에 메뉴가 담겨있을 때만, 카테고리 마지막번호 다음번호로 출력*/
             if (!cart.getCartMap().isEmpty()) {
@@ -42,8 +37,6 @@ public class KioskCategory {
                         menu.getCategoryAll().size() + 2 + ".", "비우기", "장바구니를 비웁니다.");
             }
 
-
-            /*스캐너입력-selectNo할당*/
             System.out.println("메뉴의 번호를 선택해주세요");
             selectNo = inputSc.getSelectNo();
 
